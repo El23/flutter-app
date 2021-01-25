@@ -1,11 +1,24 @@
+
+
 import 'package:flutter/material.dart';
+
+import 'models/date_model.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
+
 class _HomeScreenState extends State<HomeScreen> {
+
+  List<DateModel> dates ;
+  @override
+  void initState(){
+    super.initState();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,10 +60,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children:<Widget> [
-                          Text("Hello, Elen !",style:  TextStyle(color: Colors.white70),),
+                          Text("Hello, Elen !",style:  TextStyle(color: Colors.white70,fontSize: 16),),
                           SizedBox(height: 6,),
                           Text("Let's explore what's  will be soon", style: TextStyle(color: Colors.white70),),
                         ],
+                      ),
+                      Spacer(),
+                      Container(
+                        child: Image.asset("assets/Im.png",height:55,),
                       )
                     ],
                   )
@@ -63,3 +80,29 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+class DateTile extends StatelessWidget{
+
+String weekDay;
+String date;
+bool isSelected;
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: isSelected ? Colors.blue : Colors.transparent,
+      child: Column(
+        children:<Widget> [
+          Text("10", style: TextStyle(
+            color: isSelected ? Colors.black54 : Colors.white,
+          ),),
+          SizedBox(height: 12,),
+          Text("Sun", style: TextStyle(
+              color: isSelected ? Colors.black54 : Colors.white,
+          ),),
+        ],
+      ),
+    );
+  }
+}
+
