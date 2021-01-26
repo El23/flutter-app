@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomeScreen(),
+      home: SplashScreen(),
     );
   }
 }
@@ -44,7 +44,7 @@ class SplashScreen extends StatelessWidget {
                   child: Row(
                     children: <Widget>[
                       Text(" EVENT",style: TextStyle(color: Colors.blue, fontSize: 28,fontWeight: FontWeight.w700),),
-                      Text(" & TRAVELING", style: TextStyle(color: Colors.black54,fontSize: 28, fontWeight: FontWeight.w600),)
+                      Text("calendar", style: TextStyle(color: Colors.black54,fontSize: 28, fontWeight: FontWeight.w600),)
                     ],
                   ),
 //                    Text("about traveling the world, working remotely, inspiring people, and living a dream life!",
@@ -52,7 +52,7 @@ class SplashScreen extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>  SplashScreen()  ));
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>  HomeScreen()  ));
                   },
                   child: Container(
                     child: Row(

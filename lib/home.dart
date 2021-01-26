@@ -1,6 +1,6 @@
-
-
 import 'package:flutter/material.dart';
+import 'package:flutter_event_app/data/data.dart';
+import 'package:flutter_event_app/models/event_model.dart';
 
 import 'models/date_model.dart';
 
@@ -9,15 +9,19 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-
 class _HomeScreenState extends State<HomeScreen> {
+  List<DateModel> dates =new List<DateModel> ();
 
-  List<DateModel> dates ;
+  List<EventModel> events = new List();
+
+  String todayDateIs = "26";
+
   @override
-  void initState(){
+  void initState() {
     super.initState();
+    dates = getDates();
+    events = getEvents();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             fontWeight: FontWeight.w700),
                       ),
                       Text(
-                        " & TRAVELING",
+                        " calendar",
                         style: TextStyle(
                             color: Colors.black54,
                             fontSize: 18,
@@ -51,7 +55,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ],
                   ),
-
                   SizedBox(
                     height: 10,
                   ),
@@ -59,50 +62,148 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: <Widget>[
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children:<Widget> [
-                          Text("Hello, Elen !",style:  TextStyle(color: Colors.white70,fontSize: 16),),
-                          SizedBox(height: 6,),
-                          Text("Let's explore what's  will be soon", style: TextStyle(color: Colors.white70),),
+                        children: <Widget>[
+                          Text(
+                            "Hello, Elen !",
+                            style:
+                                TextStyle(color: Colors.white70, fontSize: 16),
+                          ),
+                          SizedBox(
+                            height: 6,
+                          ),
+                          Text(
+                            "Let's explore what's  will be soon",
+                            style: TextStyle(color: Colors.white70),
+                          ),
                         ],
                       ),
                       Spacer(),
                       Container(
-                        child: Image.asset("assets/Im.png",height:55,),
-                      )
+                        child: Image.asset(
+                          "assets/Im.png",
+                          height: 55,
+                        ),
+                      ),
                     ],
-                  )
+                  ),
+                  SizedBox(
+                    height: 18,
+                  ),
+                  Container(
+                    height: 60,
+                    child: ListView.builder(
+                      itemCount: dates.length,
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        return DateTile(
+                          weekDay: dates[index].weekDay,
+                          date: dates[index].date,
+                          isSelected: todayDateIs == dates[index].date,
+                        );
+                      },
+                    ),
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  Text(
+                    "All events",
+                    style: TextStyle(color: Colors.white, fontSize: 16),
+                  ),
+
+
+                  Container(
+                    height: 100,
+                    child: ListView.builder(
+                      itemCount: events.length,
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index){
+                        return EventTile(
+                          imgAssetPath: events[index].imgAssetPath,
+                          eventType: events[index].eventType,
+                        );
+                      },
+                    ),
+                  ),
                 ],
               ),
-            )
+            ),
+
           ],
         ),
       ),
     );
   }
 }
-class DateTile extends StatelessWidget{
 
-String weekDay;
-String date;
-bool isSelected;
+class DateTile extends StatelessWidget {
+  String weekDay;
+  String date;
+  bool isSelected;
 
+  DateTile({this.weekDay, this.date, this.isSelected});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: isSelected ? Colors.blue : Colors.transparent,
+      margin: EdgeInsets.only(right: 10),
+      padding: EdgeInsets.symmetric(horizontal: 14),
+      decoration: BoxDecoration(
+        color: isSelected ? Colors.blue : Colors.transparent,
+        borderRadius: BorderRadius.circular(8),
+      ),
       child: Column(
-        children:<Widget> [
-          Text("10", style: TextStyle(
-            color: isSelected ? Colors.black54 : Colors.white,
-          ),),
-          SizedBox(height: 12,),
-          Text("Sun", style: TextStyle(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Text(
+            date,
+            style: TextStyle(
               color: isSelected ? Colors.black54 : Colors.white,
-          ),),
+            ),
+          ),
+          SizedBox(
+            height: 12,
+          ),
+          Text(
+            weekDay,
+            style: TextStyle(
+              color: isSelected ? Colors.black54 : Colors.white,
+            ),
+          ),
         ],
       ),
     );
   }
 }
 
+class EventTile extends StatelessWidget {
+  String imgAssetPath;
+  String eventType;
+
+  EventTile({this.eventType, this.imgAssetPath});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      alignment: Alignment.center,
+      padding: EdgeInsets.symmetric(horizontal: 40),
+      margin: EdgeInsets.only(right: 16),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16)
+      ),
+     
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+
+        
+        children:<Widget> [
+          Image.asset("assets/travel.png", height: 40,color: Colors.blue,),
+          SizedBox(height: 4,),
+          Text("Travel", style: TextStyle(color: Colors.white),),
+        ],
+      ),
+    );
+  }
+}
