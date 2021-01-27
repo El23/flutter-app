@@ -53,6 +53,13 @@ class _HomeScreenState extends State<HomeScreen> {
                             fontSize: 18,
                             fontWeight: FontWeight.w600),
                       ),
+                      Text(
+                        "FOR YOU",
+                        style: TextStyle(
+                            color: Colors.blue,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600),
+                      ),
                     ],
                   ),
                   SizedBox(
@@ -66,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           Text(
                             "Hello, Elen !",
                             style:
-                                TextStyle(color: Colors.white70, fontSize: 16),
+                                TextStyle(color: Colors.white70, fontSize: 24),
                           ),
                           SizedBox(
                             height: 6,
@@ -81,7 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       Container(
                         child: Image.asset(
                           "assets/Im.png",
-                          height: 55,
+                          height: 70,
                         ),
                       ),
                     ],
@@ -109,8 +116,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   Text(
                     "All events",
-                    style: TextStyle(color: Colors.white, fontSize: 16),
+                    style: TextStyle(color: Colors.white, fontSize: 24),
                   ),
+                  SizedBox(height: 16,),
 
 
                   Container(
@@ -127,6 +135,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       },
                     ),
                   ),
+                  SizedBox(height: 16,),
+
+                  Text("Popular" , style: TextStyle(color: Colors.white, fontSize: 24),),
                 ],
               ),
             ),
@@ -155,6 +166,7 @@ class DateTile extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
       ),
       child: Column(
+
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text(
@@ -188,22 +200,54 @@ class EventTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      padding: EdgeInsets.symmetric(horizontal: 40),
+      padding: EdgeInsets.symmetric(horizontal: 27),
       margin: EdgeInsets.only(right: 16),
       decoration: BoxDecoration(
+          color: Colors.black26,
         borderRadius: BorderRadius.circular(16)
       ),
      
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
 
-        
         children:<Widget> [
-          Image.asset("assets/travel.png", height: 40,color: Colors.blue,),
-          SizedBox(height: 4,),
-          Text("Travel", style: TextStyle(color: Colors.white),),
+
+          Image.asset(imgAssetPath, height: 40,color: Colors.blue,),
+          SizedBox(height: 12,),
+          Text(eventType, style: TextStyle(color: Colors.white),),
         ],
       ),
     );
   }
 }
+
+class Popular extends StatelessWidget {
+  String descroption;
+  String date;
+  String address;
+  String imgAssetPath;
+
+  Popular({this.descroption, this.date, this.imgAssetPath, this.address});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Row(
+        children:<Widget> [
+          Column(
+            children:<Widget> [
+              Text(descroption),
+              Row(
+                children:<Widget> [
+
+                ],
+              )
+
+            ],
+          )
+        ],
+      ),
+    );
+  }
+}
+

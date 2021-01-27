@@ -32,24 +32,35 @@ class SplashScreen extends StatelessWidget {
             )),
           ),
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 50),
+//            padding: EdgeInsets.symmetric(horizontal: 50),
             child: Column(
 
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
 //                Image.asset("airplane-icon.png"),
                 Container(
-                  padding: EdgeInsets.only(bottom: 130,left: 10),
-                  margin: EdgeInsets.only(left:5 ),
+
+//                  margin: EdgeInsets.only(left:5 ),
+                  padding: EdgeInsets.symmetric(horizontal: 25,vertical:25),
+                  decoration: BoxDecoration(
+                    color: Color(0xff2E4053)
+
+                  ),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Text(" EVENT",style: TextStyle(color: Colors.blue, fontSize: 28,fontWeight: FontWeight.w700),),
-                      Text("calendar", style: TextStyle(color: Colors.black54,fontSize: 28, fontWeight: FontWeight.w600),)
+                      Text("EVENT",style: TextStyle(color: Colors.blue, fontSize: 26,fontWeight: FontWeight.w700),),
+                      Text("calendar", style: TextStyle(color: Colors.white,fontSize: 22, fontWeight: FontWeight.w600),),
+                      Text("FOR YOU",style: TextStyle(color: Colors.blue, fontSize: 26,fontWeight: FontWeight.w700),),
+
+
                     ],
                   ),
+
 //                    Text("about traveling the world, working remotely, inspiring people, and living a dream life!",
 //                      style: TextStyle(color: Colors.white),),
                 ),
+                SizedBox(height: 24,),
                 GestureDetector(
                   onTap: (){
                     Navigator.push(context, MaterialPageRoute(builder: (context)=>  HomeScreen()  ));

@@ -51,12 +51,12 @@ List<EventModel> getEvents(){
   events.add(eventModel);
    eventModel = new EventModel();
 
-  eventModel.imgAssetPath = "assets/travel.png";
+  eventModel.imgAssetPath = "assets/balloon.png";
   eventModel.eventType = " Ballooning ";
   events.add(eventModel);
   eventModel = new EventModel();
 
-  eventModel.imgAssetPath = "assets/travel.png";
+  eventModel.imgAssetPath = "assets/tennis.png";
   eventModel.eventType = " Sports ";
   events.add(eventModel);
   eventModel = new EventModel();
