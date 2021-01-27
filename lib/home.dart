@@ -3,6 +3,7 @@ import 'package:flutter_event_app/data/data.dart';
 import 'package:flutter_event_app/models/event_model.dart';
 
 import 'models/date_model.dart';
+import 'models/popular_model.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -10,9 +11,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<DateModel> dates =new List<DateModel> ();
-
+  List<DateModel> dates = new List<DateModel>();
   List<EventModel> events = new List();
+  List<EventsPopularModel> popular = new List<EventsPopularModel>();
 
   String todayDateIs = "26";
 
@@ -21,6 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     dates = getDates();
     events = getEvents();
+    popular = getEventsPopular();
   }
 
   @override
@@ -47,10 +49,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             fontWeight: FontWeight.w700),
                       ),
                       Text(
-                        " calendar",
+                        "calendar",
                         style: TextStyle(
-                            color: Colors.black54,
-                            fontSize: 18,
+                            color: Colors.white,
+                            fontSize: 16,
                             fontWeight: FontWeight.w600),
                       ),
                       Text(
@@ -80,7 +82,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           Text(
                             "Let's explore what's  will be soon",
-                            style: TextStyle(color: Colors.white70),
+                            style:
+                                TextStyle(color: Colors.white70, fontSize: 16),
                           ),
                         ],
                       ),
@@ -118,16 +121,16 @@ class _HomeScreenState extends State<HomeScreen> {
                     "All events",
                     style: TextStyle(color: Colors.white, fontSize: 24),
                   ),
-                  SizedBox(height: 16,),
-
-
+                  SizedBox(
+                    height: 16,
+                  ),
                   Container(
                     height: 100,
                     child: ListView.builder(
                       itemCount: events.length,
                       shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index){
+                      itemBuilder: (context, index) {
                         return EventTile(
                           imgAssetPath: events[index].imgAssetPath,
                           eventType: events[index].eventType,
@@ -135,13 +138,31 @@ class _HomeScreenState extends State<HomeScreen> {
                       },
                     ),
                   ),
-                  SizedBox(height: 16,),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  Text(
+                    "Popular",
+                    style: TextStyle(color: Colors.white, fontSize: 24),
+                  ),
+                  Container(
+                    child: ListView.builder(
+                      itemCount: popular.length,
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        return Popular(
 
-                  Text("Popular" , style: TextStyle(color: Colors.white, fontSize: 24),),
+                          description: popular[index].description,
+                          imgAssetPath: popular[index].imgAssetPass,
+                          date: popular[index].date,
+                          location: popular[index].location,
+                        );
+                      },
+                    ),
+                  )
                 ],
               ),
             ),
-
           ],
         ),
       ),
@@ -166,7 +187,6 @@ class DateTile extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
       ),
       child: Column(
-
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text(
@@ -176,7 +196,7 @@ class DateTile extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 12,
+            height: 16,
           ),
           Text(
             weekDay,
@@ -203,18 +223,25 @@ class EventTile extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 27),
       margin: EdgeInsets.only(right: 16),
       decoration: BoxDecoration(
-          color: Colors.black26,
-        borderRadius: BorderRadius.circular(16)
-      ),
-     
+          color: Colors.black26, borderRadius: BorderRadius.circular(8)),
+
+
       child: Column(
+
         mainAxisAlignment: MainAxisAlignment.center,
-
-        children:<Widget> [
-
-          Image.asset(imgAssetPath, height: 40,color: Colors.blue,),
-          SizedBox(height: 12,),
-          Text(eventType, style: TextStyle(color: Colors.white),),
+        children: <Widget>[
+          Image.asset(
+            imgAssetPath,
+            height: 40,
+            color: Colors.blue,
+          ),
+          SizedBox(
+            height: 12,
+          ),
+          Text(
+            eventType,
+            style: TextStyle(color: Colors.white),
+          ),
         ],
       ),
     );
@@ -222,32 +249,77 @@ class EventTile extends StatelessWidget {
 }
 
 class Popular extends StatelessWidget {
-  String descroption;
+  String description;
   String date;
-  String address;
+  String location;
   String imgAssetPath;
 
-  Popular({this.descroption, this.date, this.imgAssetPath, this.address});
+  Popular({this.description, this.date, this.imgAssetPath, this.location});
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.only(bottom: 8),
+      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      decoration: BoxDecoration(color: Colors.black26, borderRadius: BorderRadius.circular(8)),
       child: Row(
-        children:<Widget> [
-          Column(
-            children:<Widget> [
-              Text(descroption),
-              Row(
-                children:<Widget> [
+        children: <Widget>[
+          Expanded(
 
+            child: Container(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    description,
+                    style: TextStyle(color: Colors.white, fontSize: 18),
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Icon(
+                        Icons.description,
+                        color: Colors.white,
+                      ),
+                      SizedBox(
+                        width: 8,
+                      ),
+                      Text(
+                        date,
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    width: 8,
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Icon(
+                        Icons.add_location_rounded,
+                        color: Colors.blue,
+                      ),
+                      SizedBox(
+                        width: 8,
+                      ),
+                      Text(
+                        location,
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                    ],
+                  ),
                 ],
-              )
-
-            ],
-          )
+              ),
+            ),
+          ),
+          Image.asset(
+            imgAssetPath,
+            height: 40,
+          ),
         ],
       ),
     );
   }
 }
-
